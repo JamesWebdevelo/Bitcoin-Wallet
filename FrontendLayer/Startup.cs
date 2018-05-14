@@ -48,24 +48,33 @@ namespace FrontendLayer
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            // Open window
-            Bootstrap();
+            if (HybridSupport.IsElectronActive)
+            {
+                // Open window
+                ElectronBootstrap();
+            }
         }
 
         /// <summary>
         /// Responsible class to activate the window
         /// </summary>
-        public async void Bootstrap()
+        public async void ElectronBootstrap()
         {
-            /// Don't show the blank window on start-up
-            BrowserWindowOptions options = new BrowserWindowOptions { Show = false };
+            /// Window options
+            BrowserWindowOptions options = new BrowserWindowOptions
+            {
+                /// Window size
+                Width = 1152,
+                Height = 864,
+                /// Don't show the blank window on start-up
+                Show = false
+            };
 
             /// Show window when ready
             BrowserWindow mainWindow = await Electron.WindowManager.CreateWindowAsync(options);
-            mainWindow.OnReadyToShow += () =>
-            {
-                mainWindow.Show();
-            };
+
+            mainWindow.OnReadyToShow += () => mainWindow.Show();
+            mainWindow.SetTitle("TestNet Bitcoin Wallet");
 
             /// Create Menu
             MenuItem[] menu = new MenuItem[]

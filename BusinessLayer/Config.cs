@@ -32,5 +32,13 @@ namespace BusinessLayer
             //}
             //Load();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void Load()
+        {
+
+        }
     }
 }
