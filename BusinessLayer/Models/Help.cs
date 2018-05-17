@@ -36,10 +36,10 @@ namespace BusinessLayer
             {
                 Console.WriteLine(reason);
             }
-            Console.WriteLine("Press any key to exit...");
-            //ResetColor();
-            Console.ReadKey();
-            Environment.Exit(0);
+            //Console.WriteLine("Press any key to exit...");
+            ////ResetColor();
+            //Console.ReadKey();
+            //Environment.Exit(0);
         }
     }
 }

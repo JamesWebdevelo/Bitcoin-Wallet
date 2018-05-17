@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 using ElectronNET.API;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
-//https://youtu.be/nuM6AojRFHk?t=5m11s
 namespace FrontendLayer
 {
     public class Program

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FrontendLayer.Models;
+using ElectronNET.API;
 
 namespace FrontendLayer.Controllers
 {
@@ -12,20 +13,27 @@ namespace FrontendLayer.Controllers
     {
         public IActionResult Index()
         {
+            Electron.IpcMain.On("async-msg", (args) =>
+            {
+                var mainWindow = Electron.WindowManager.BrowserWindows.First();
+
+                /// Send (to which "Window", on which "channel", which "message")
+                Electron.IpcMain.Send(mainWindow, "asynchronous-reply", "pong");
+            });
             return View();
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            //ViewData["Message"] = "Your application description page.";
 
-            return View();
-        }
+            Electron.IpcMain.On("async-msg", (args) =>
+            {
+                var mainWindow = Electron.WindowManager.BrowserWindows.First();
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
+                /// Send (to which "Window", on which "channel", which "message")
+                Electron.IpcMain.Send(mainWindow, "asynchronous-reply", "pong");
+            });
             return View();
         }
 

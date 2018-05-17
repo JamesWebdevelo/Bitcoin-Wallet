@@ -81,7 +81,7 @@ namespace FrontendLayer
             {
                 new MenuItem
                 {
-                    Label = "File",
+                    Label = "Start",
                     Submenu = new MenuItem[]
                     {
                         new MenuItem
@@ -96,7 +96,7 @@ namespace FrontendLayer
                 },
                 new MenuItem
                 {
-                    Label = "Info",
+                    Label = "About",
                     Click = async () =>
                     {
                         await Electron.Dialog.ShowMessageBoxAsync("Welcome to James's Bitcoin Wallet.");
