@@ -1,4 +1,5 @@
-﻿using NBitcoin;
+﻿using HBitcoin.KeyManagement;
+using NBitcoin;
 using System;
 using System.Collections.Generic;
 using System.Text;

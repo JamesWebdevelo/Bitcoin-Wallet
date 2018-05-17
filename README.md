@@ -12,7 +12,7 @@ This is a Bitcoin Wallet based on the Bitcoin Testnet
 
 * NBitcoin Framework by [Nicolas Dorier](https://github.com/MetacoSA/NBitcoin)
 * HBitcoin Framework by [nopara73](https://github.com/nopara73/HBitcoin)
-* QBit Ninja API [https://qbitninja.docs.apiary.io]
+* [QBit Ninja API](https://qbitninja.docs.apiary.io)
 
 * Electron.net API by [Gregor Biswanger](https://github.com/ElectronNET)
 
