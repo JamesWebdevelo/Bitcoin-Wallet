@@ -2,28 +2,27 @@
 using NBitcoin;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+
 
 namespace BusinessLayer.Models
 {
     public class Wallet
     {
-        public Key PrivateKey { set; get; }
-
         /// <summary>
-        /// Constructor
+        /// Properties
         /// </summary>
-        public Wallet()
-        {
-
-        }
+        public Key PrivateKey { set; get; }
 
         /// <summary>
         /// Method
         /// </summary>
-        public void GenerateWallet()
+        public string GenerateWallet()
         {
-            AssertArgumentsLenght(args.Length, 1, 2);
+            Assertion.AssertArgumentsLenght(/*args.Length*/ 2, 1, 2);
+
+            string[] args = null;
             var walletFilePath = GetWalletFilePath(args);
             AssertWalletNotExists(walletFilePath);
 
@@ -31,42 +30,93 @@ namespace BusinessLayer.Models
             string pwConf;
             do
             {
-                // 1. Get password from user
-                WriteLine("Choose a password:");
-                pw = PasswordConsole.ReadPassword();
-                // 2. Get password confirmation from user
-                WriteLine("Confirm password:");
-                pwConf = PasswordConsole.ReadPassword();
+                /// 1. Get password from user
+                //WriteLine("Choose a password:");
+                //pw = PasswordConsole.ReadPassword();
+                pw = "admin";
+                /// 2. Get password confirmation from user
+                //WriteLine("Confirm password:");
+                //pwConf = PasswordConsole.ReadPassword();
+                pwConf = "admin";
 
-                if (pw != pwConf) {
-                    WriteLine("Passwords do not match. Try again!");
-            } while (pw != pwConf);
+                if (pw != pwConf)
+                {
+                    //WriteLine("Passwords do not match. Try again!");
+                }
+            }
+            while (pw != pwConf);
 
-            // 3. Create wallet
-            Mnemonic mnemonic;
+            /// 3. Create wallet
+            try
+            {
+                /// S 
+                Safe safe = Safe.Create(out Mnemonic mnemonic, pw, walletFilePath, Config.Network);
+                return mnemonic.ToString();
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
 
-            Safe safe = Safe.Create(out mnemonic, pw, walletFilePath, Config.Network);
-            // If no exception thrown the wallet is successfully created.
-            WriteLine();
-            WriteLine("Wallet is successfully created.");
-            WriteLine($"Wallet file: {walletFilePath}");
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        private static string GetWalletFilePath(string[] args)
+        {
+            string walletFileName = GetArgumentValue(args, "wallet-file", required: false);
+            if (walletFileName == "") walletFileName = Config.DefaultWalletFileName;
 
-            // 4. Display mnemonic
-            //WriteLine();
-            //WriteLine("Write down the following mnemonic words.");
-            //WriteLine("With the mnemonic words AND your password you can recover this wallet by using the recover-wallet command.");
-            //WriteLine();
-            //WriteLine("-------");
-            //WriteLine(mnemonic);
-            //WriteLine("-------");
+            var walletDirName = "Wallets";
+            Directory.CreateDirectory(walletDirName);
+            return Path.Combine(walletDirName, walletFileName);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="walletFilePath"></param>
+        public static void AssertWalletNotExists(string walletFilePath)
+        {
+            if (File.Exists(walletFilePath))
+            {
+                //Exit($"A wallet, named {walletFilePath} already exists.");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="argName"></param>
+        /// <param name="required"></param>
+        /// <returns></returns>
+        private static string GetArgumentValue(string[] args, string argName, bool required = true)
+        {
+            string argValue = "";
+            foreach (var arg in args)
+            {
+                if (arg.StartsWith($"{argName}=", StringComparison.OrdinalIgnoreCase))
+                {
+                    argValue = arg.Substring(arg.IndexOf("=") + 1);
+                    break;
+                }
+            }
+            if (required && argValue == "")
+            {
+                //Exit($@"'{argName}=' is not specified.");
+            }
+            return argValue;
         }
 
         /// <summary>
         /// Method
         /// </summary>
-        public void RecoverWallet()
-        {
+        //public void RecoverWallet()
+        //{
 
-        }
+        //}
     }
 }

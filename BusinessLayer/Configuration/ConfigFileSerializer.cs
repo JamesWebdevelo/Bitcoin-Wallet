@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace BusinessLayer.Configuration
@@ -32,6 +33,21 @@ namespace BusinessLayer.Configuration
             Network = network;
             ConnectionType = connectionType;
             CanSpendUnconfirmed = canSpendUnconfirmed;
+        }
+
+        /// <summary>
+        /// Method
+        /// </summary>
+        /// <param name="walletFileName"></param>
+        /// <param name="network"></param>
+        /// <param name="connectionType"></param>
+        /// <param name="canSpendUnconfirmed"></param>
+        internal static void Serialize(string walletFileName, string network, string connectionType, string canSpendUnconfirmed)
+        {
+            var content =
+                JsonConvert.SerializeObject(new ConfigFileSerializer(walletFileName, network, connectionType, canSpendUnconfirmed), Formatting.Indented);
+
+            File.WriteAllText(ConfigFilePath, content);
         }
     }
 }

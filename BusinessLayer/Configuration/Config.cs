@@ -28,8 +28,8 @@ namespace BusinessLayer
         {
             if (!File.Exists(ConfigFileSerializer.ConfigFilePath))
             {
-                //Save();
-                ConfigFileSerializer.Serialize(DefaultWalletFileName, Network.ToString(), ConnectionType.ToString(), CanSpendUnconfirmed.ToString());
+                Save();
+                //ConfigFileSerializer.Serialize(DefaultWalletFileName, Network.ToString(), ConnectionType.ToString(), CanSpendUnconfirmed.ToString());
                 //Console.WriteLine($"{ConfigFileSerializer.ConfigFilePath} was missing. It has been created created with default settings.");
             }
             Load();
@@ -46,10 +46,10 @@ namespace BusinessLayer
         /// <summary>
         /// Method
         /// </summary>
-        //public static void Save()
-        //{
-        //    ConfigFileSerializer.Serialize(DefaultWalletFileName, Network.ToString(), ConnectionType.ToString(), CanSpendUnconfirmed.ToString());
-        //    Load();
-        //}
+        public static void Save()
+        {
+            ConfigFileSerializer.Serialize(DefaultWalletFileName, Network.ToString(), ConnectionType.ToString(), CanSpendUnconfirmed.ToString());
+            Load();
+        }
     }
 }

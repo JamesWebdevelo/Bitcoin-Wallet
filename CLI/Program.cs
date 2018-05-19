@@ -10,12 +10,12 @@ namespace CLI
         public static HashSet<string> Commands = new HashSet<string>()
         {
             "help",
-            //"generate-wallet",
-            //"recover-wallet",
-            //"show-balances",
-            //"show-history",
-            //"receive",
-            //"send"
+            "generate-wallet",
+            "recover-wallet",
+            "show-balances",
+            "show-history",
+            "receive",
+            "send"
         };
         #endregion
         /// <summary>

@@ -1,12 +1,12 @@
-# James Webdevelo - Bitcoin Wallet
-This is a Bitcoin Wallet based on the Bitcoin Testnet
+# Electron.Net - Bitcoin Wallet
+This is a simple Bitcoin Wallet based on the Bitcoin Testnet.
 
 ---
-### I have planned to implement and workin' currently on:
+### I have planned to implement:
 
-* Create a simple layered .Net Core MVC Application
-* Build a Business layer based on the NBitcoin Framework
-* Make the Frontend Layer available as Electron Desktop App
+* Create a simple layered .Net Core Application
+* Build a Business layer based on the N/HBitcoin Framework
+* Build an ASP.Net MVC based Frontend Layer and make it available as Electron.Net Desktop Application
 
 ---
 ### Used Libraries and Frameworks for this project:
@@ -15,6 +15,7 @@ This is a Bitcoin Wallet based on the Bitcoin Testnet
 * HBitcoin Framework by [nopara73](https://github.com/nopara73/HBitcoin)
 * [QBit Ninja API](https://qbitninja.docs.apiary.io)
 
-* Electron.net API by [Gregor Biswanger](https://github.com/ElectronNET)
+* Electron.Net API by [Gregor Biswanger](https://github.com/ElectronNET)
+* [Materialize CSS Library](https://materializecss.com/)
 
 ---
