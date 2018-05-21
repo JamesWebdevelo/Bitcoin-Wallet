@@ -21,10 +21,10 @@ namespace BusinessLayer.Models
         public string GenerateWallet(string password)
         {
 
-            string[] args = null;
+            //string[] args = null;
 
             /// Get Path of Wallet file
-            var walletFilePath = GetWalletFilePath(args);
+            var walletFilePath = GetWalletFilePath();
             AssertWalletNotExists(walletFilePath);
 
             /// Create wallet
@@ -44,9 +44,9 @@ namespace BusinessLayer.Models
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        private static string GetWalletFilePath(string[] args)
+        private static string GetWalletFilePath()
         {
-            string walletFileName = GetArgumentValue(args, "wallet-file", required: false);
+            string walletFileName = GetArgumentValue("wallet-file", required: false);
 
             if (walletFileName == "")
             {
@@ -77,17 +77,17 @@ namespace BusinessLayer.Models
         /// <param name="argName"></param>
         /// <param name="required"></param>
         /// <returns></returns>
-        private static string GetArgumentValue(string[] args, string argName, bool required = true)
+        private static string GetArgumentValue(string argName, bool required = true)
         {
             string argValue = "";
-            foreach (var arg in args)
-            {
-                if (arg.StartsWith($"{argName}=", StringComparison.OrdinalIgnoreCase))
-                {
-                    argValue = arg.Substring(arg.IndexOf("=") + 1);
-                    break;
-                }
-            }
+            //foreach (var arg in args)
+            //{
+            //    if (arg.StartsWith($"{argName}=", StringComparison.OrdinalIgnoreCase))
+            //    {
+            //        argValue = arg.Substring(arg.IndexOf("=") + 1);
+            //        break;
+            //    }
+            //}
             if (required && argValue == "")
             {
                 //Exit($@"'{argName}=' is not specified.");

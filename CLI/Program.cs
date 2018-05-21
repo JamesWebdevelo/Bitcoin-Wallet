@@ -15,7 +15,7 @@ namespace CLI
         {
             // Load config file
             // It also creates it with default settings if doesn't exist
-            Config.Load();
+            //Config.Load();
 
             #region Create Wallet
             string password = "admin";
@@ -25,8 +25,8 @@ namespace CLI
             
             do
             {
-                var value = myWallet.GenerateWallet(password);
-                Console.WriteLine(value);
+                string result = myWallet.GenerateWallet(password);
+                Console.WriteLine(result);
             }
             while (password != passwordConf);
             #endregion
