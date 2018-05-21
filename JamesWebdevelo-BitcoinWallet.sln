@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{E0BCF5D6-6A78-486D-ADE7-5AA4D883B1AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{E0BCF5D6-6A78-486D-ADE7-5AA4D883B1AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI", "CLI\CLI.csproj", "{3FEB94C5-CBBE-42B9-911A-B0405EA26E1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLI", "CLI\CLI.csproj", "{3FEB94C5-CBBE-42B9-911A-B0405EA26E1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontendLayer", "FrontendLayer\FrontendLayer.csproj", "{2F36A92B-86A6-4388-A523-2A689B4F9377}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontendLayer", "FrontendLayer\FrontendLayer.csproj", "{2F36A92B-86A6-4388-A523-2A689B4F9377}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

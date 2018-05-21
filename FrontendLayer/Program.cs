@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BusinessLayer;
 using ElectronNET.API;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +10,8 @@ namespace FrontendLayer
         public static void Main(string[] args)
         {
             BuildWebHost(args).Run();
-
+            /// Run the Configuration on the Business Layer
+            Config.Load();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

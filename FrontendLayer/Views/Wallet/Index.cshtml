@@ -7,10 +7,26 @@
 
 <div class="container">
     <div class="row col-md-12">
-        <button class="btn btn-default">Create Wallet</button>
+        <button class="btn btn-default" id="btnCreateWallet">Create Wallet</button>
     </div>
     <div class="row col-md-12">
        <div id="displayInfo"></div>
     </div>
 </div>
+
+
+<script>
+    const { ipcRenderer } = require("electron");
+
+    // Send async message to controller
+    document.getElementById("async-msg").addEventListener("click", () => {
+        ipcRenderer.send("async-msg", 'ping');
+    });
+
+    // Receive async message from controller
+    ipcRenderer.on('asynchronous-reply', (event, arg) => {
+        const message = `Asynchronous message reply: ${arg}`;
+        document.getElementById('async-reply').innerHTML = message;
+    });
+</script>
 

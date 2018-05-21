@@ -49,5 +49,20 @@ namespace BusinessLayer.Configuration
 
             File.WriteAllText(ConfigFilePath, content);
         }
+
+        /// <summary>
+        /// Method
+        /// </summary>
+        /// <returns></returns>
+        internal static ConfigFileSerializer Deserialize()
+        {
+            if (!File.Exists(ConfigFilePath))
+                throw new Exception($"Config file does not exist. Create {ConfigFilePath} before reading it.");
+
+            var contentString = File.ReadAllText(ConfigFilePath);
+            var configFileSerializer = JsonConvert.DeserializeObject<ConfigFileSerializer>(contentString);
+
+            return new ConfigFileSerializer(configFileSerializer.DefaultWalletFileName, configFileSerializer.Network, configFileSerializer.ConnectionType, configFileSerializer.CanSpendUnconfirmed);
+        }
     }
 }

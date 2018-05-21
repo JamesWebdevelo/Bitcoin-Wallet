@@ -8,49 +8,29 @@ using System.Text;
 
 namespace BusinessLayer.Models
 {
-    public class Wallet
+    public class BitcoinWallet
     {
         /// <summary>
         /// Properties
         /// </summary>
-        public Key PrivateKey { set; get; }
+        public Key PrivateKey { private set; get; }
 
         /// <summary>
         /// Method
         /// </summary>
-        public string GenerateWallet()
+        public string GenerateWallet(string password)
         {
-            Assertion.AssertArgumentsLenght(/*args.Length*/ 2, 1, 2);
 
             string[] args = null;
+
+            /// Get Path of Wallet file
             var walletFilePath = GetWalletFilePath(args);
             AssertWalletNotExists(walletFilePath);
 
-            string pw;
-            string pwConf;
-            do
-            {
-                /// 1. Get password from user
-                //WriteLine("Choose a password:");
-                //pw = PasswordConsole.ReadPassword();
-                pw = "admin";
-                /// 2. Get password confirmation from user
-                //WriteLine("Confirm password:");
-                //pwConf = PasswordConsole.ReadPassword();
-                pwConf = "admin";
-
-                if (pw != pwConf)
-                {
-                    //WriteLine("Passwords do not match. Try again!");
-                }
-            }
-            while (pw != pwConf);
-
-            /// 3. Create wallet
+            /// Create wallet
             try
             {
-                /// S 
-                Safe safe = Safe.Create(out Mnemonic mnemonic, pw, walletFilePath, Config.Network);
+                Safe safe = Safe.Create(out Mnemonic mnemonic, password, walletFilePath, Config.Network);
                 return mnemonic.ToString();
             }
             catch (Exception e)
@@ -67,7 +47,11 @@ namespace BusinessLayer.Models
         private static string GetWalletFilePath(string[] args)
         {
             string walletFileName = GetArgumentValue(args, "wallet-file", required: false);
-            if (walletFileName == "") walletFileName = Config.DefaultWalletFileName;
+
+            if (walletFileName == "")
+            {
+                walletFileName = Config.DefaultWalletFileName;
+            }
 
             var walletDirName = "Wallets";
             Directory.CreateDirectory(walletDirName);
@@ -75,14 +59,14 @@ namespace BusinessLayer.Models
         }
 
         /// <summary>
-        /// 
+        /// Method
         /// </summary>
         /// <param name="walletFilePath"></param>
         public static void AssertWalletNotExists(string walletFilePath)
         {
             if (File.Exists(walletFilePath))
             {
-                //Exit($"A wallet, named {walletFilePath} already exists.");
+                throw new Exception($"A wallet, named {walletFilePath} already exists.");
             }
         }
 

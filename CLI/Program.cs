@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
 
@@ -6,18 +7,6 @@ namespace CLI
 {
     class Program
     {
-        #region Commands
-        public static HashSet<string> Commands = new HashSet<string>()
-        {
-            "help",
-            "generate-wallet",
-            "recover-wallet",
-            "show-balances",
-            "show-history",
-            "receive",
-            "send"
-        };
-        #endregion
         /// <summary>
         /// There are roughly three way to communicate with the Bitcoin network: as a full node, as an SPV node or through an HTTP API.
         /// </summary>
@@ -28,14 +17,23 @@ namespace CLI
             // It also creates it with default settings if doesn't exist
             Config.Load();
 
-            var command = args[0];
+            #region Create Wallet
+            string password = "admin";
+            string passwordConf = "admin";
+
+            BitcoinWallet myWallet = new BitcoinWallet();
+            
+            do
+            {
+                var value = myWallet.GenerateWallet(password);
+                Console.WriteLine(value);
+            }
+            while (password != passwordConf);
+            #endregion
 
             #region HelpCommand
-            if (command == "help")
-            {
-                Help.AssertArgumentsLenght(args.Length, 1, 1);
-                Help.DisplayHelp(Commands);
-            }
+            Help myHelp = new Help();
+            myHelp.DisplayHelp();
             #endregion
         }
     }

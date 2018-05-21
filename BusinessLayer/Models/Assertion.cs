@@ -23,4 +23,22 @@ namespace BusinessLayer.Models
         }
         #endregion
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="length"></param>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    public void AssertArgumentsLenght(int length, int min, int max)
+    {
+        if (length < min)
+        {
+            Exit($"Not enough arguments are specified, minimum: {min}");
+        }
+        if (length > max)
+        {
+            Exit($"Too many arguments are specified, maximum: {max}");
+        }
+    }
 }

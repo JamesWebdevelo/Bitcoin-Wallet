@@ -4,21 +4,21 @@ using System.Text;
 
 namespace BusinessLayer
 {
-    public static class Help
+    public class Help
     {
-        public static void AssertArgumentsLenght(int length, int min, int max)
-        {
-            if (length < min)
-            {
-                Exit($"Not enough arguments are specified, minimum: {min}");
-            }
-            if (length > max)
-            {
-                Exit($"Too many arguments are specified, maximum: {max}");
-            }
-        }
 
-        public static void DisplayHelp(HashSet<string> Commands)
+        public HashSet<string> Commands = new HashSet<string>()
+        {
+            "help",
+            "generate-wallet",
+            "recover-wallet",
+            "show-balances",
+            "show-history",
+            "receive",
+            "send"
+        };
+
+        public void DisplayHelp()
         {
             Console.WriteLine("Possible commands are:");
             foreach (var cmd in Commands)
@@ -28,7 +28,7 @@ namespace BusinessLayer
             Console.WriteLine();
         }
 
-        public static void Exit(string reason = "", ConsoleColor color = ConsoleColor.Red)
+        public void Exit(string reason = "", ConsoleColor color = ConsoleColor.Red)
         {
             //ForegroundColor = color;
             Console.WriteLine();
@@ -36,10 +36,8 @@ namespace BusinessLayer
             {
                 Console.WriteLine(reason);
             }
-            //Console.WriteLine("Press any key to exit...");
-            ////ResetColor();
-            //Console.ReadKey();
-            //Environment.Exit(0);
+
+            Environment.Exit(0);
         }
     }
 }
