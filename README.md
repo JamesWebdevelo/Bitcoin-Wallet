@@ -1,6 +1,6 @@
 # Electron.Net - Bitcoin Wallet
 This is a simple **Bitcoin Wallet** I created for fun on the _Testnet_.
-I am really interested in this whole DLT & Blockchain topic and with this little project I try to improve my skills :)
+  I am really interested in this whole DLT & Blockchain topic and with this little project I try to improve my skills :)
 
 There are already way better solutions out there. 
 
@@ -14,10 +14,10 @@ There are already way better solutions out there.
 ---
 ### Used Libraries and Frameworks for this project:
 
-> NBitcoin Framework by [Nicolas Dorier](https://github.com/MetacoSA/NBitcoin)
-> HBitcoin Framework by [nopara73](https://github.com/nopara73/HBitcoin)
-> [QBit Ninja API](https://qbitninja.docs.apiary.io) by the famous **Nicolas Dorier**
-> Electron.Net API by [Gregor Biswanger](https://github.com/ElectronNET)
-> [Materialize CSS Library](https://materializecss.com/)
+> * NBitcoin Framework by [Nicolas Dorier](https://github.com/MetacoSA/NBitcoin)
+> * HBitcoin Framework by [nopara73](https://github.com/nopara73/HBitcoin)
+> * [QBit Ninja API](https://qbitninja.docs.apiary.io) by the famous **Nicolas Dorier**
+> * Electron.Net API by [Gregor Biswanger](https://github.com/ElectronNET)
+> * [Materialize CSS Library](https://materializecss.com/)
 
 ---
