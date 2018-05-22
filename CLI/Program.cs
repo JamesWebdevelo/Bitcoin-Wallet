@@ -15,7 +15,7 @@ namespace CLI
         {
             // Load config file
             // It also creates it with default settings if doesn't exist
-            //Config.Load();
+            Config.Load();
 
             #region Create Wallet
             string password = "admin";
@@ -35,6 +35,8 @@ namespace CLI
             Help myHelp = new Help();
             myHelp.DisplayHelp();
             #endregion
+
+            Console.ReadKey();
         }
     }
 }

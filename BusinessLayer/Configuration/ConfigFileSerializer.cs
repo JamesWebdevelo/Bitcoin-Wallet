@@ -8,9 +8,7 @@ namespace BusinessLayer.Configuration
 {
     public class ConfigFileSerializer
     {
-        /// <summary>
-        /// Properties
-        /// </summary>
+        #region Properties
         public static string ConfigFilePath = "Config.json";
 
         /// Keep Properties public to get serialized
@@ -18,14 +16,9 @@ namespace BusinessLayer.Configuration
         public string Network { get; set; }
         public string ConnectionType { get; set; }
         public string CanSpendUnconfirmed { get; set; }
+        #endregion
 
-        /// <summary>
-        /// Method
-        /// </summary>
-        /// <param name="walletFileName"></param>
-        /// <param name="network"></param>
-        /// <param name="connectionType"></param>
-        /// <param name="canSpendUnconfirmed"></param>
+        #region Constructor
         [JsonConstructor]
         private ConfigFileSerializer(string walletFileName, string network, string connectionType, string canSpendUnconfirmed)
         {
@@ -34,9 +27,11 @@ namespace BusinessLayer.Configuration
             ConnectionType = connectionType;
             CanSpendUnconfirmed = canSpendUnconfirmed;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
-        /// Method
+        /// Write the defined settings into the Config.json file
         /// </summary>
         /// <param name="walletFileName"></param>
         /// <param name="network"></param>
@@ -44,25 +39,26 @@ namespace BusinessLayer.Configuration
         /// <param name="canSpendUnconfirmed"></param>
         internal static void Serialize(string walletFileName, string network, string connectionType, string canSpendUnconfirmed)
         {
-            var content =
-                JsonConvert.SerializeObject(new ConfigFileSerializer(walletFileName, network, connectionType, canSpendUnconfirmed), Formatting.Indented);
-
+            var content = JsonConvert.SerializeObject(new ConfigFileSerializer(walletFileName, network, connectionType, canSpendUnconfirmed), Formatting.Indented);
             File.WriteAllText(ConfigFilePath, content);
         }
 
         /// <summary>
-        /// Method
+        /// Read the defined settings from the Config.json file
         /// </summary>
         /// <returns></returns>
         internal static ConfigFileSerializer Deserialize()
         {
             if (!File.Exists(ConfigFilePath))
+            {
                 throw new Exception($"Config file does not exist. Create {ConfigFilePath} before reading it.");
+            }
 
             var contentString = File.ReadAllText(ConfigFilePath);
             var configFileSerializer = JsonConvert.DeserializeObject<ConfigFileSerializer>(contentString);
 
             return new ConfigFileSerializer(configFileSerializer.DefaultWalletFileName, configFileSerializer.Network, configFileSerializer.ConnectionType, configFileSerializer.CanSpendUnconfirmed);
         }
+        #endregion
     }
 }

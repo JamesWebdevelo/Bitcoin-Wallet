@@ -24,6 +24,7 @@ namespace BusinessLayer
         public static bool CanSpendUnconfirmed = false;
         public static ConnectionType ConnectionType = ConnectionType.Http;
 
+        #region Constructor
         static Config()
         {
             if (!File.Exists(ConfigFileSerializer.ConfigFilePath))
@@ -32,51 +33,79 @@ namespace BusinessLayer
             }
             Load();
         }
+        #endregion
 
-        /// <summary>
-        /// Method
-        /// </summary>
+        #region Methods
         public static void Load()
         {
+            ///
             var rawContent = ConfigFileSerializer.Deserialize();
 
             DefaultWalletFileName = rawContent.DefaultWalletFileName;
 
+            /// 1. Decide which Network
             if (rawContent.Network == Network.Main.ToString())
+            {
                 Network = Network.Main;
+            }
             else if (rawContent.Network == Network.TestNet.ToString())
+            {
                 Network = Network.TestNet;
+            }
             else if (rawContent.Network == null)
+            {
                 throw new Exception($"Network is missing from {ConfigFileSerializer.ConfigFilePath}");
+            }
             else
+            {
                 throw new Exception($"Wrong Network is specified in {ConfigFileSerializer.ConfigFilePath}");
+            }
 
+            /// 2. Decide which Connection Type
             if (rawContent.ConnectionType == ConnectionType.FullNode.ToString())
+            {
                 ConnectionType = ConnectionType.FullNode;
+            }
             else if (rawContent.ConnectionType == ConnectionType.Http.ToString())
+            {
                 ConnectionType = ConnectionType.Http;
+            }
             else if (rawContent.ConnectionType == null)
+            {
                 throw new Exception($"ConnectionType is missing from {ConfigFileSerializer.ConfigFilePath}");
+            }
             else
+            {
                 throw new Exception($"Wrong ConnectionType is specified in {ConfigFileSerializer.ConfigFilePath}");
+            }
 
+            /// 3. Decide if Unconfirmed can be spent
             if (rawContent.CanSpendUnconfirmed == "True")
+            {
                 CanSpendUnconfirmed = true;
+            }
             else if (rawContent.CanSpendUnconfirmed == "False")
+            {
                 CanSpendUnconfirmed = false;
+            }
             else if (rawContent.CanSpendUnconfirmed == null)
+            {
                 throw new Exception($"CanSpendUnconfirmed is missing from {ConfigFileSerializer.ConfigFilePath}");
+            }
             else
+            {
                 throw new Exception($"Wrong CanSpendUnconfirmed is specified in {ConfigFileSerializer.ConfigFilePath}");
+            }
         }
 
         /// <summary>
-        /// Method
+        /// Creates a new Config.json File
         /// </summary>
         public static void Save()
         {
             ConfigFileSerializer.Serialize(DefaultWalletFileName, Network.ToString(), ConnectionType.ToString(), CanSpendUnconfirmed.ToString());
             Load();
         }
+        #endregion
     }
 }

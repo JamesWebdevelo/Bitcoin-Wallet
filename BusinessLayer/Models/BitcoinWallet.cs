@@ -46,13 +46,17 @@ namespace BusinessLayer.Models
         /// <returns></returns>
         private static string GetWalletFilePath()
         {
-            string walletFileName = GetArgumentValue("wallet-file", required: false);
+            //string walletFileName = GetArgumentValue("wallet-file", required: false);
 
-            if (walletFileName == "")
-            {
-                walletFileName = Config.DefaultWalletFileName;
-            }
+            //if (walletFileName == "")
+            //{
+            //    walletFileName = Config.DefaultWalletFileName;
+            //}
 
+            /// Keep default name for the time being
+            string walletFileName = Config.DefaultWalletFileName;
+
+            /// Create Directory and the "Wallets" Folder
             var walletDirName = "Wallets";
             Directory.CreateDirectory(walletDirName);
             return Path.Combine(walletDirName, walletFileName);
@@ -66,34 +70,34 @@ namespace BusinessLayer.Models
         {
             if (File.Exists(walletFilePath))
             {
-                throw new Exception($"A wallet, named {walletFilePath} already exists.");
+                //throw new Exception($"A wallet, named {walletFilePath} already exists.");
             }
         }
 
         /// <summary>
-        /// 
+        /// Get the specified wallet name if one was defined. Else set the name to a default value;
         /// </summary>
         /// <param name="args"></param>
         /// <param name="argName"></param>
         /// <param name="required"></param>
         /// <returns></returns>
-        private static string GetArgumentValue(string argName, bool required = true)
-        {
-            string argValue = "";
-            //foreach (var arg in args)
-            //{
-            //    if (arg.StartsWith($"{argName}=", StringComparison.OrdinalIgnoreCase))
-            //    {
-            //        argValue = arg.Substring(arg.IndexOf("=") + 1);
-            //        break;
-            //    }
-            //}
-            if (required && argValue == "")
-            {
-                //Exit($@"'{argName}=' is not specified.");
-            }
-            return argValue;
-        }
+        //private static string GetArgumentValue(string argName, bool required = true)
+        //{
+        //    string argValue = "";
+        //    //foreach (var arg in args)
+        //    //{
+        //    //    if (arg.StartsWith($"{argName}=", StringComparison.OrdinalIgnoreCase))
+        //    //    {
+        //    //        argValue = arg.Substring(arg.IndexOf("=") + 1);
+        //    //        break;
+        //    //    }
+        //    //}
+        //    if (required && argValue == "")
+        //    {
+        //        //Exit($@"'{argName}=' is not specified.");
+        //    }
+        //    return argValue;
+        //}
 
         /// <summary>
         /// Method
