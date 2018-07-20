@@ -27,10 +27,12 @@ namespace BusinessLayer
         #region Constructor
         static Config()
         {
+            /// Create the default Config File if it does not exists
             if (!File.Exists(ConfigFileSerializer.ConfigFilePath))
             {
                 Save();
             }
+            /// Otherwise just load it.
             Load();
         }
         #endregion
@@ -38,7 +40,7 @@ namespace BusinessLayer
         #region Methods
         public static void Load()
         {
-            ///
+            /// Get the defined settings
             var rawContent = ConfigFileSerializer.Deserialize();
 
             DefaultWalletFileName = rawContent.DefaultWalletFileName;

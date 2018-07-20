@@ -6,7 +6,9 @@ namespace BusinessLayer
 {
     public class Help
     {
-
+        /// <summary>
+        /// Commands as Hashset
+        /// </summary>
         public HashSet<string> Commands = new HashSet<string>()
         {
             "help",
@@ -30,7 +32,6 @@ namespace BusinessLayer
 
         public void Exit(string reason = "", ConsoleColor color = ConsoleColor.Red)
         {
-            //ForegroundColor = color;
             Console.WriteLine();
             if (reason != "")
             {

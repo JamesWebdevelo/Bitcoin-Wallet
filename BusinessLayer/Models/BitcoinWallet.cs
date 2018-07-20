@@ -15,28 +15,34 @@ namespace BusinessLayer.Models
         /// </summary>
         public Key PrivateKey { private set; get; }
 
+        #region Method
+
         /// <summary>
         /// Method
         /// </summary>
         public string GenerateWallet(string password)
         {
 
-            //string[] args = null;
-
             /// Get Path of Wallet file
             var walletFilePath = GetWalletFilePath();
-            AssertWalletNotExists(walletFilePath);
+            string response = AssertWalletNotExists(walletFilePath);
 
-            /// Create wallet
-            try
+            /// Create wallet if not already exists
+            if (response is null)
             {
-                Safe safe = Safe.Create(out Mnemonic mnemonic, password, walletFilePath, Config.Network);
-                return mnemonic.ToString();
+                try
+                {
+                    /// Use Safe class to properly manage our private keys
+                    Safe safe = Safe.Create(out Mnemonic mnemonic, password, walletFilePath, Config.Network);
+                    return mnemonic.ToString();
+                }
+                catch (Exception e)
+                {
+                    return e.Message.ToString();
+                }
             }
-            catch (Exception e)
-            {
-                return e.ToString();
-            }
+
+            return response;
         }
 
         /// <summary>
@@ -46,13 +52,6 @@ namespace BusinessLayer.Models
         /// <returns></returns>
         private static string GetWalletFilePath()
         {
-            //string walletFileName = GetArgumentValue("wallet-file", required: false);
-
-            //if (walletFileName == "")
-            //{
-            //    walletFileName = Config.DefaultWalletFileName;
-            //}
-
             /// Keep default name for the time being
             string walletFileName = Config.DefaultWalletFileName;
 
@@ -63,14 +62,18 @@ namespace BusinessLayer.Models
         }
 
         /// <summary>
-        /// Method
+        /// Check if wallet file already exists
         /// </summary>
         /// <param name="walletFilePath"></param>
-        public static void AssertWalletNotExists(string walletFilePath)
+        public static string AssertWalletNotExists(string walletFilePath)
         {
             if (File.Exists(walletFilePath))
             {
-                //throw new Exception($"A wallet, named {walletFilePath} already exists.");
+                return ($"A wallet, named {walletFilePath} already exists.");
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -100,11 +103,42 @@ namespace BusinessLayer.Models
         //}
 
         /// <summary>
-        /// Method
+        /// Recover an existing Bitcoin wallet
         /// </summary>
-        //public void RecoverWallet()
-        //{
+        public string RecoverWallet(string mnemonicString, string password)
+        {
 
-        //}
+            var walletFilePath = GetWalletFilePath();
+            AssertWalletNotExists(walletFilePath);
+
+            AssertCorrectMnemonicFormat(mnemonicString);
+            var mnemonic = new Mnemonic(mnemonicString);
+
+            Safe safe = Safe.Recover(mnemonic, password, walletFilePath, Config.Network);
+
+            // If no exception thrown the wallet is successfully recovered.
+            return ($"Wallet {walletFilePath} is successfully recovered.");
+        }
+
+        /// <summary>
+        /// tbd
+        /// </summary>
+        /// <param name="mnemonic"></param>
+        public static void AssertCorrectMnemonicFormat(string mnemonic)
+        {
+            try
+            {
+                if (new Mnemonic(mnemonic).IsValidChecksum)
+                {
+                    return;
+                }
+            }
+            catch (FormatException) { }
+            catch (NotSupportedException) { }
+
+            //Exit("Incorrect mnemonic format.");
+        }
+
+        #endregion
     }
 }

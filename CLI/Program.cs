@@ -14,7 +14,7 @@ namespace CLI
         static void Main(string[] args)
         {
             // Load config file
-            // It also creates it with default settings if doesn't exist
+            // It also creates it with default settings if it doesn't exist
             Config.Load();
 
             #region Create Wallet
@@ -33,7 +33,7 @@ namespace CLI
 
             #region HelpCommand
             Help myHelp = new Help();
-            myHelp.DisplayHelp();
+            //myHelp.DisplayHelp();
             #endregion
 
             Console.ReadKey();
