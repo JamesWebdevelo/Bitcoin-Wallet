@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BusinessLayer.Models
 {
-    public class BitcoinWallet
+    public partial class BitcoinWallet
     {
         /// <summary>
         /// Properties
@@ -25,7 +25,7 @@ namespace BusinessLayer.Models
 
             /// Get Path of Wallet file
             var walletFilePath = GetWalletFilePath();
-            string response = AssertWalletNotExists(walletFilePath);
+            string response = Assertion.AssertWalletNotExists(walletFilePath);
 
             /// Create wallet if not already exists
             if (response is null)
@@ -61,21 +61,7 @@ namespace BusinessLayer.Models
             return Path.Combine(walletDirName, walletFileName);
         }
 
-        /// <summary>
-        /// Check if wallet file already exists
-        /// </summary>
-        /// <param name="walletFilePath"></param>
-        public static string AssertWalletNotExists(string walletFilePath)
-        {
-            if (File.Exists(walletFilePath))
-            {
-                return ($"A wallet, named {walletFilePath} already exists.");
-            }
-            else
-            {
-                return null;
-            }
-        }
+
 
         /// <summary>
         /// Get the specified wallet name if one was defined. Else set the name to a default value;
@@ -101,44 +87,6 @@ namespace BusinessLayer.Models
         //    }
         //    return argValue;
         //}
-
-        /// <summary>
-        /// Recover an existing Bitcoin wallet
-        /// </summary>
-        public string RecoverWallet(string mnemonicString, string password)
-        {
-
-            var walletFilePath = GetWalletFilePath();
-            AssertWalletNotExists(walletFilePath);
-
-            AssertCorrectMnemonicFormat(mnemonicString);
-            var mnemonic = new Mnemonic(mnemonicString);
-
-            Safe safe = Safe.Recover(mnemonic, password, walletFilePath, Config.Network);
-
-            // If no exception thrown the wallet is successfully recovered.
-            return ($"Wallet {walletFilePath} is successfully recovered.");
-        }
-
-        /// <summary>
-        /// tbd
-        /// </summary>
-        /// <param name="mnemonic"></param>
-        public static void AssertCorrectMnemonicFormat(string mnemonic)
-        {
-            try
-            {
-                if (new Mnemonic(mnemonic).IsValidChecksum)
-                {
-                    return;
-                }
-            }
-            catch (FormatException) { }
-            catch (NotSupportedException) { }
-
-            //Exit("Incorrect mnemonic format.");
-        }
-
         #endregion
     }
 }

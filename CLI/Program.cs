@@ -31,9 +31,8 @@ namespace CLI
             while (password != passwordConf);
             #endregion
 
-            #region HelpCommand
-            Help myHelp = new Help();
-            //myHelp.DisplayHelp();
+            #region Recover Wallet
+
             #endregion
 
             Console.ReadKey();
