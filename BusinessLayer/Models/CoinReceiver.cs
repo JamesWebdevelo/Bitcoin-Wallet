@@ -1,19 +1,19 @@
-﻿using HBitcoin.KeyManagement;
+﻿using BusinessLayer.Communication;
+using HBitcoin.KeyManagement;
 using NBitcoin;
 using QBitNinja.Client.Models;
 using System;
-using BusinessLayer.QBitNinjaAPI;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
 namespace BusinessLayer.Models
 {
-    public partial class BitcoinWallet
+    public class CoinReceiver
     {
         public void ReceiveCoins()
         {
-            var walletFilePath = GetWalletFilePath();
+            var walletFilePath = WalletGenerator.GetWalletFilePath();
 
             Safe safe = DecryptWalletByAskingForPassword(walletFilePath);
 

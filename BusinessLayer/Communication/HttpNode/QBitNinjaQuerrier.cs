@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.QBitNinjaAPI
+namespace BusinessLayer.Communication
 {
     public class QBitNinjaQuerrier
     {

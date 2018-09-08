@@ -17,18 +17,18 @@ namespace CLI
             // It also creates it with default settings if it doesn't exist
             Config.Load();
 
-            #region Create Wallet
-            //string password = "admin";
-            //string passwordConf = "admin";
+            #region Generate a Wallet
+            string password = "admin";
+            string passwordConf = "admin";
 
-            //BitcoinWallet myWallet = new BitcoinWallet();
-            
-            //do
-            //{
-            //    string result = myWallet.GenerateWallet(password);
-            //    Console.WriteLine(result);
-            //}
-            //while (password != passwordConf);
+            WalletGenerator myWallet = new WalletGenerator();
+
+            do
+            {
+                string result = myWallet.GenerateWallet(password);
+                Console.WriteLine(result);
+            }
+            while (password != passwordConf);
             #endregion
 
             #region Recover Wallet

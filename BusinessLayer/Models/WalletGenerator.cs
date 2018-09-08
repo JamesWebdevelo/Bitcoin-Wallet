@@ -8,21 +8,13 @@ using System.Text;
 
 namespace BusinessLayer.Models
 {
-    public partial class BitcoinWallet
+    public class WalletGenerator
     {
-        /// <summary>
-        /// Properties
-        /// </summary>
-        public Key PrivateKey { private set; get; }
-
-        #region Method
-
         /// <summary>
         /// Method
         /// </summary>
         public string GenerateWallet(string password)
         {
-
             /// Get Path of Wallet file
             var walletFilePath = GetWalletFilePath();
             string response = Assertion.AssertWalletNotExists(walletFilePath);
@@ -50,7 +42,8 @@ namespace BusinessLayer.Models
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        private static string GetWalletFilePath()
+        /// Changed from private to internal
+        internal static string GetWalletFilePath()
         {
             /// Keep default name for the time being
             string walletFileName = Config.DefaultWalletFileName;
@@ -60,8 +53,6 @@ namespace BusinessLayer.Models
             Directory.CreateDirectory(walletDirName);
             return Path.Combine(walletDirName, walletFileName);
         }
-
-
 
         /// <summary>
         /// Get the specified wallet name if one was defined. Else set the name to a default value;
@@ -87,6 +78,5 @@ namespace BusinessLayer.Models
         //    }
         //    return argValue;
         //}
-        #endregion
     }
 }
