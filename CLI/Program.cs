@@ -18,17 +18,17 @@ namespace CLI
             Config.Load();
 
             #region Create Wallet
-            string password = "admin";
-            string passwordConf = "admin";
+            //string password = "admin";
+            //string passwordConf = "admin";
 
-            BitcoinWallet myWallet = new BitcoinWallet();
+            //BitcoinWallet myWallet = new BitcoinWallet();
             
-            do
-            {
-                string result = myWallet.GenerateWallet(password);
-                Console.WriteLine(result);
-            }
-            while (password != passwordConf);
+            //do
+            //{
+            //    string result = myWallet.GenerateWallet(password);
+            //    Console.WriteLine(result);
+            //}
+            //while (password != passwordConf);
             #endregion
 
             #region Recover Wallet

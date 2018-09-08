@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLI", "CLI\CLI.csproj", "{3FEB94C5-CBBE-42B9-911A-B0405EA26E1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestForWallet", "UnitTestForWallet\UnitTestForWallet.csproj", "{52303FE6-76BC-4EA4-B8DF-1A42CD93F965}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3FEB94C5-CBBE-42B9-911A-B0405EA26E1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FEB94C5-CBBE-42B9-911A-B0405EA26E1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FEB94C5-CBBE-42B9-911A-B0405EA26E1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52303FE6-76BC-4EA4-B8DF-1A42CD93F965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52303FE6-76BC-4EA4-B8DF-1A42CD93F965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52303FE6-76BC-4EA4-B8DF-1A42CD93F965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52303FE6-76BC-4EA4-B8DF-1A42CD93F965}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

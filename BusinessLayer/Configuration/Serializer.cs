@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BusinessLayer.Configuration
 {
-    public class ConfigFileSerializer
+    public class Serializer
     {
         #region Properties
         public static string ConfigFilePath = "Config.json";
@@ -20,7 +20,7 @@ namespace BusinessLayer.Configuration
 
         #region Constructor
         [JsonConstructor]
-        private ConfigFileSerializer(string walletFileName, string network, string connectionType, string canSpendUnconfirmed)
+        private Serializer(string walletFileName, string network, string connectionType, string canSpendUnconfirmed)
         {
             DefaultWalletFileName = walletFileName;
             Network = network;
@@ -39,7 +39,7 @@ namespace BusinessLayer.Configuration
         /// <param name="canSpendUnconfirmed"></param>
         internal static void Serialize(string walletFileName, string network, string connectionType, string canSpendUnconfirmed)
         {
-            var content = JsonConvert.SerializeObject(new ConfigFileSerializer(walletFileName, network, connectionType, canSpendUnconfirmed), Formatting.Indented);
+            var content = JsonConvert.SerializeObject(new Serializer(walletFileName, network, connectionType, canSpendUnconfirmed), Formatting.Indented);
             File.WriteAllText(ConfigFilePath, content);
         }
 
@@ -47,7 +47,7 @@ namespace BusinessLayer.Configuration
         /// Read the defined settings from the Config.json file
         /// </summary>
         /// <returns></returns>
-        internal static ConfigFileSerializer Deserialize()
+        internal static Serializer Deserialize()
         {
             if (!File.Exists(ConfigFilePath))
             {
@@ -55,9 +55,9 @@ namespace BusinessLayer.Configuration
             }
 
             var contentString = File.ReadAllText(ConfigFilePath);
-            var configFileSerializer = JsonConvert.DeserializeObject<ConfigFileSerializer>(contentString);
+            var configFileSerializer = JsonConvert.DeserializeObject<Serializer>(contentString);
 
-            return new ConfigFileSerializer(configFileSerializer.DefaultWalletFileName, configFileSerializer.Network, configFileSerializer.ConnectionType, configFileSerializer.CanSpendUnconfirmed);
+            return new Serializer(configFileSerializer.DefaultWalletFileName, configFileSerializer.Network, configFileSerializer.ConnectionType, configFileSerializer.CanSpendUnconfirmed);
         }
         #endregion
     }
