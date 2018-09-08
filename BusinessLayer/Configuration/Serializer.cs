@@ -30,10 +30,10 @@ namespace BusinessLayer.Configuration
         internal static void Serialize(string walletFileName, string network, string connectionType, string canSpendUnconfirmed)
         {
             var content = JsonConvert.SerializeObject(
-                new Serializer(walletFileName, network, connectionType, canSpendUnconfirmed), Formatting.Indented);
+                new Serializer(walletFileName, network, connectionType, canSpendUnconfirmed), 
+                Formatting.Indented);
             File.WriteAllText(ConfigFilePath, content);
         }
-
         #endregion
     }
 }
