@@ -8,7 +8,7 @@ namespace CLI
     class Program
     {
         /// <summary>
-        /// There are roughly three way to communicate with the Bitcoin network: as a full node, as an SPV node or through an HTTP API.
+        /// There are roughly three ways to communicate with the Bitcoin network: as a full node, as an SPV node or through an HTTP API.
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)

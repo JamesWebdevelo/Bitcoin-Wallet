@@ -6,18 +6,8 @@ using System.Text;
 
 namespace BusinessLayer.Configuration
 {
-    public class Deserializer
+    public class Deserializer : ConfigFile
     {
-        #region Properties
-        public static string ConfigFilePath = "Config.json";
-
-        /// Keep Properties public to get serialized
-        public string DefaultWalletFileName { get; set; }
-        public string Network { get; set; }
-        public string ConnectionType { get; set; }
-        public string CanSpendUnconfirmed { get; set; }
-        #endregion
-
         #region Constructor
         [JsonConstructor]
         private Deserializer(string walletFileName, string network, string connectionType, string canSpendUnconfirmed)

@@ -18,8 +18,6 @@ namespace BusinessLayer
     /// </summary>
     public static class Config
     {
-        public static string ConfigFilePath = "Config.json";
-
         /// Initialized with default attributes
         public static string DefaultWalletFileName = @"BitcoinWallet.json";
         public static Network Network = Network.TestNet;
@@ -30,7 +28,7 @@ namespace BusinessLayer
         static Config()
         {
             /// Create the default Config File if it does not exists
-            if (!File.Exists(ConfigFilePath))
+            if (!File.Exists(ConfigFile.ConfigFilePath))
             {
                 Save();
             }
@@ -58,11 +56,11 @@ namespace BusinessLayer
             }
             else if (rawContent.Network == null)
             {
-                throw new Exception($"Network is missing from {ConfigFilePath}");
+                throw new Exception($"Network is missing from {ConfigFile.ConfigFilePath}");
             }
             else
             {
-                throw new Exception($"Wrong Network is specified in {ConfigFilePath}");
+                throw new Exception($"Wrong Network is specified in {ConfigFile.ConfigFilePath}");
             }
 
             /// 2. Decide which Connection Type
@@ -76,11 +74,11 @@ namespace BusinessLayer
             }
             else if (rawContent.ConnectionType == null)
             {
-                throw new Exception($"ConnectionType is missing from {ConfigFilePath}");
+                throw new Exception($"ConnectionType is missing from {ConfigFile.ConfigFilePath}");
             }
             else
             {
-                throw new Exception($"Wrong ConnectionType is specified in {ConfigFilePath}");
+                throw new Exception($"Wrong ConnectionType is specified in {ConfigFile.ConfigFilePath}");
             }
 
             /// 3. Decide if Unconfirmed can be spent
@@ -94,11 +92,11 @@ namespace BusinessLayer
             }
             else if (rawContent.CanSpendUnconfirmed == null)
             {
-                throw new Exception($"CanSpendUnconfirmed is missing from {ConfigFilePath}");
+                throw new Exception($"CanSpendUnconfirmed is missing from {ConfigFile.ConfigFilePath}");
             }
             else
             {
-                throw new Exception($"Wrong CanSpendUnconfirmed is specified in {ConfigFilePath}");
+                throw new Exception($"Wrong CanSpendUnconfirmed is specified in {ConfigFile.ConfigFilePath}");
             }
         }
 
