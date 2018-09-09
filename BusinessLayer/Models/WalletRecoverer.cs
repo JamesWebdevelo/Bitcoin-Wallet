@@ -7,14 +7,14 @@ using System.Text;
 
 namespace BusinessLayer.Models
 {
-    public class WalletRecoverer : WalletFile
+    public class WalletRecoverer
     {
         /// <summary>
         /// Recover an existing Bitcoin wallet
         /// </summary>
         public string RecoverWallet(string mnemonicString, string password)
         {
-            var walletFilePath = GetWalletFilePath();
+            var walletFilePath = WalletFile.GetWalletFilePath();
             Assertion.AssertWalletNotExists(walletFilePath);
 
             Assertion.AssertCorrectMnemonicFormat(mnemonicString);

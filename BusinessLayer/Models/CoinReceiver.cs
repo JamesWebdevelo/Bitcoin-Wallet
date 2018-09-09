@@ -13,7 +13,7 @@ namespace BusinessLayer.Models
     {
         public void ReceiveCoins()
         {
-            var walletFilePath = WalletGenerator.GetWalletFilePath();
+            var walletFilePath = WalletFile.GetWalletFilePath();
 
             Safe safe = DecryptWalletByAskingForPassword(walletFilePath);
 

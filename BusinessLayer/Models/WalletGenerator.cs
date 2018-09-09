@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BusinessLayer.Models
 {
-    public class WalletGenerator : WalletFile
+    public class WalletGenerator
     {
         /// <summary>
         /// Method
@@ -16,7 +16,7 @@ namespace BusinessLayer.Models
         public string GenerateWallet(string password)
         {
             /// Get Path of Wallet file
-            var walletFilePath = GetWalletFilePath();
+            var walletFilePath = WalletFile.GetWalletFilePath();
             string response = Assertion.AssertWalletNotExists(walletFilePath);
 
             /// Create wallet if not already exists
@@ -46,17 +46,17 @@ namespace BusinessLayer.Models
         //private static string GetArgumentValue(string argName, bool required = true)
         //{
         //    string argValue = "";
-        //    //foreach (var arg in args)
-        //    //{
-        //    //    if (arg.StartsWith($"{argName}=", StringComparison.OrdinalIgnoreCase))
-        //    //    {
-        //    //        argValue = arg.Substring(arg.IndexOf("=") + 1);
-        //    //        break;
-        //    //    }
-        //    //}
+        //    foreach (var arg in args)
+        //    {
+        //        if (arg.StartsWith($"{argName}=", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            argValue = arg.Substring(arg.IndexOf("=") + 1);
+        //            break;
+        //        }
+        //    }
         //    if (required && argValue == "")
         //    {
-        //        //Exit($@"'{argName}=' is not specified.");
+        //        Exit($@"'{argName}=' is not specified.");
         //    }
         //    return argValue;
         //}

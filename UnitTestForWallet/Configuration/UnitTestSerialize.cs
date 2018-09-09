@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using BusinessLayer;
 
 namespace UnitTestForWallet
 {
@@ -8,7 +9,7 @@ namespace UnitTestForWallet
         [Fact]
         public void TestSerialize()
         {
-
+            Config.Load();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BusinessLayer.Models
 {
-    public class WalletFile
+    public class WalletFile : IWalletFile
     {
         public string WalletFileName { get; set; }
         public string WalletFilePath { get; set; }
@@ -24,6 +24,8 @@ namespace BusinessLayer.Models
             /// Create Directory and the "Wallets" Folder
             var walletDirName = "Wallets";
             Directory.CreateDirectory(walletDirName);
+
+            /// Return Wallet folder Path
             return Path.Combine(walletDirName, walletFileName);
         }
     }
