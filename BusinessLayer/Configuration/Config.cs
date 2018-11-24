@@ -18,7 +18,7 @@ namespace BusinessLayer
     /// </summary>
     public static class Config
     {
-        /// Initialized with default attributes
+        /// Initialized with default attributes        
         public static string DefaultWalletFileName = @"BitcoinWallet.json";
         public static Network Network = Network.TestNet;
         public static bool CanSpendUnconfirmed = false;
@@ -45,16 +45,34 @@ namespace BusinessLayer
 
             DefaultWalletFileName = rawContent.DefaultWalletFileName;
 
-            /// 1. Decide which Network
-            if (rawContent.Network == Network.Main.ToString())
+            /// 1. Decide which Network (based on Law Of Demeter)
+            Network = GetNetwork(rawContent.Network);
+
+            /// 2. Decide which Connection Type (based on Law Of Demeter)
+            ConnectionType = GetConnectionType(rawContent.ConnectionType);
+
+            /// 3. Decide if Unconfirmed can be spent (based on Law Of Demeter)
+            CanSpendUnconfirmed = GetSpendInformation(rawContent.CanSpendUnconfirmed);
+        }
+
+        /// <summary>
+        /// Returns the Network
+        /// </summary>
+        /// <param name="rawContent"></param>
+        /// <returns></returns>
+        public static Network GetNetwork(string value)
+        {
+            Network output;
+
+            if (value == Network.Main.ToString())
             {
-                Network = Network.Main;
+                output = Network.Main;
             }
-            else if (rawContent.Network == Network.TestNet.ToString())
+            else if (value == Network.TestNet.ToString())
             {
-                Network = Network.TestNet;
+                output = Network.TestNet;
             }
-            else if (rawContent.Network == null)
+            else if (value == null)
             {
                 throw new Exception($"Network is missing from {ConfigFile.ConfigFilePath}");
             }
@@ -62,17 +80,27 @@ namespace BusinessLayer
             {
                 throw new Exception($"Wrong Network is specified in {ConfigFile.ConfigFilePath}");
             }
+            return output;
+        }
 
-            /// 2. Decide which Connection Type
-            if (rawContent.ConnectionType == ConnectionType.FullNode.ToString())
+        /// <summary>
+        /// Returns the Connectiontype
+        /// </summary>
+        /// <param name="rawContent"></param>
+        /// <returns></returns>
+        public static ConnectionType GetConnectionType(string value)
+        {
+            ConnectionType output;
+
+            if (value == ConnectionType.FullNode.ToString())
             {
-                ConnectionType = ConnectionType.FullNode;
+                output = ConnectionType.FullNode;
             }
-            else if (rawContent.ConnectionType == ConnectionType.Http.ToString())
+            else if (value == ConnectionType.Http.ToString())
             {
-                ConnectionType = ConnectionType.Http;
+                output = ConnectionType.Http;
             }
-            else if (rawContent.ConnectionType == null)
+            else if (value == null)
             {
                 throw new Exception($"ConnectionType is missing from {ConfigFile.ConfigFilePath}");
             }
@@ -81,16 +109,27 @@ namespace BusinessLayer
                 throw new Exception($"Wrong ConnectionType is specified in {ConfigFile.ConfigFilePath}");
             }
 
-            /// 3. Decide if Unconfirmed can be spent
-            if (rawContent.CanSpendUnconfirmed == "True")
+            return output;
+        }
+
+        /// <summary>
+        /// Return whether the output is spendable 
+        /// </summary>
+        /// <param name="rawContent"></param>
+        /// <returns></returns>
+        public static bool GetSpendInformation(string value)
+        {
+            bool output;
+
+            if (value == "True")
             {
-                CanSpendUnconfirmed = true;
+                output = true;
             }
-            else if (rawContent.CanSpendUnconfirmed == "False")
+            else if (value == "False")
             {
-                CanSpendUnconfirmed = false;
+                output = false;
             }
-            else if (rawContent.CanSpendUnconfirmed == null)
+            else if (value == null)
             {
                 throw new Exception($"CanSpendUnconfirmed is missing from {ConfigFile.ConfigFilePath}");
             }
@@ -98,6 +137,8 @@ namespace BusinessLayer
             {
                 throw new Exception($"Wrong CanSpendUnconfirmed is specified in {ConfigFile.ConfigFilePath}");
             }
+
+            return output;
         }
 
         /// <summary>

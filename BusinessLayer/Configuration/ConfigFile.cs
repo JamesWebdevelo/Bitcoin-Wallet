@@ -2,11 +2,15 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
+
+/// Allows to test interal methods
+[assembly: InternalsVisibleTo("UnitTestForWallet")]
 
 namespace BusinessLayer.Configuration
 {
-    public class ConfigFile
+    public class ConfigFile : IConfigFile
     {
         /// Keep Properties public to get serialized
         public static string ConfigFilePath = "Config.json";

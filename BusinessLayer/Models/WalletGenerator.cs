@@ -8,12 +8,12 @@ using System.Text;
 
 namespace BusinessLayer.Models
 {
-    public class WalletGenerator
+    public static class WalletGenerator
     {
         /// <summary>
         /// Method
         /// </summary>
-        public string GenerateWallet(string password)
+        public static string GenerateWallet(string password)
         {
             /// Get Path of Wallet file
             var walletFilePath = WalletFile.GetWalletFilePath();

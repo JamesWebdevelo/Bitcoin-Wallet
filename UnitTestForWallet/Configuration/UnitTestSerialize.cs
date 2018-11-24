@@ -7,9 +7,13 @@ namespace UnitTestForWallet
     public class UnitTestSerialize
     {
         [Fact]
-        public void TestSerialize()
+        public void Serialize_()
         {
-            Config.Load();
+            // Arrange
+
+            // Act
+
+            // Assert
         }
     }
 }

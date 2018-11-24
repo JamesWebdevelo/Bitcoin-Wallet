@@ -20,6 +20,7 @@ namespace BusinessLayer.Configuration
             var content = JsonConvert.SerializeObject(
                 new ConfigFile(walletFileName, network, connectionType, canSpendUnconfirmed), 
                 Formatting.Indented);
+            /// Write into file
             File.WriteAllText(ConfigFilePath, content);
         }
     }

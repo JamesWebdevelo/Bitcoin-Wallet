@@ -19,6 +19,7 @@ namespace BusinessLayer.Configuration
                 throw new Exception($"Config file does not exist. Create {ConfigFilePath} before reading it.");
             }
 
+            /// Select config file content, parse it and return stringified Properties
             var contentString = File.ReadAllText(ConfigFilePath);
             var configFileSerializer = JsonConvert.DeserializeObject<Deserializer>(contentString);
 

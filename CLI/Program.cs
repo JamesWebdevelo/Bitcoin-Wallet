@@ -20,14 +20,13 @@ namespace CLI
             #region Generate a Wallet
             string password = "admin";
             string passwordConf = "admin";
-            string mnemonic = "";
 
-            WalletGenerator generator = new WalletGenerator();
+            string mnemonic = "";
 
             do
             {
                 /// Display Seed
-                mnemonic = generator.GenerateWallet(password);
+                mnemonic = WalletGenerator.GenerateWallet(password);
                 Console.WriteLine(mnemonic);
             }
             while (password != passwordConf);
@@ -35,11 +34,9 @@ namespace CLI
             #endregion
 
             #region Recover Wallet
-            WalletRecoverer recoverer = new WalletRecoverer();
-
             do
             {
-                string result = recoverer.RecoverWallet(mnemonic, password);
+                string result = WalletRecoverer.RecoverWallet(mnemonic, password);
                 /// Display Seed
                 Console.WriteLine(result);
             }
