@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UnitTestForWallet.Configuration
+namespace BusinessLayer.Models
 {
-    class UnitTestDeserialize
+    public class Sender
     {
     }
 }

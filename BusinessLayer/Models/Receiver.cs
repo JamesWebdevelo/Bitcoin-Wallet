@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Communication;
+﻿using BusinessLayer.Assertions;
+using BusinessLayer.Communication;
 using HBitcoin.KeyManagement;
 using NBitcoin;
 using QBitNinja.Client.Models;
@@ -9,38 +10,32 @@ using System.Text;
 
 namespace BusinessLayer.Models
 {
-    public class CoinReceiver
+    public class Receiver
     {
-        public void ReceiveCoins()
+        private List<string> PublicAddresses { get; set; }
+
+        public List<string> ReceiveCoins()
         {
-            var walletFilePath = WalletFile.GetWalletFilePath();
+            /// Get current Wallet file
+            var walletFilePath = Wallet.GetWalletFilePath(Config.DefaultWalletFileName);
 
             Safe safe = DecryptWalletByAskingForPassword(walletFilePath);
 
             if (Config.ConnectionType == ConnectionType.Http)
             {
-                Dictionary<BitcoinAddress, List<BalanceOperation>> operationsPerReceiveAddresses = QBitNinjaQuerrier.QueryOperationsPerSafeAddresses(safe, 7, HdPathType.Receive);
-
-                //WriteLine("---------------------------------------------------------------------------");
-                //WriteLine("Unused Receive Addresses");
-                //WriteLine("---------------------------------------------------------------------------");
-                foreach (var elem in operationsPerReceiveAddresses)
-                {
-                    if (elem.Value.Count == 0)
-                    {
-                        //WriteLine($"{elem.Key.ToString()}");
-                    }
-                }
-
+                PublicAddresses = GetPublicAddresses(safe);
             }
             else if (Config.ConnectionType == ConnectionType.FullNode)
             {
+
                 throw new NotImplementedException();
             }
             else
             {
                 throw new NotImplementedException();
             }
+
+            return PublicAddresses;
         }
 
         private static Safe DecryptWalletByAskingForPassword(string walletFilePath)
@@ -71,6 +66,28 @@ namespace BusinessLayer.Models
             }
             //WriteLine($"{walletFilePath} wallet is decrypted.");
             return safe;
+        }
+
+        /// <summary>
+        /// Method returns 7 unused Bitcoin addressed based on the used Safe (Private Key)
+        /// </summary>
+        /// <param name="safe"></param>
+        /// <returns></returns>
+        private static List<string> GetPublicAddresses(Safe safe)
+        {
+            List<string> output = null;
+
+            /// Just want to show the user 7 unused addresses
+            Dictionary<BitcoinAddress, List<BalanceOperation>> operationsPerReceiveAddresses = QBitNinjaQuerrier.QueryOperationsPerSafeAddresses(safe, 7, HdPathType.Receive);
+
+            foreach (var elem in operationsPerReceiveAddresses)
+            {
+                if (elem.Value.Count == 0)
+                {
+                    output.Add(elem.Key.ToString());
+                }
+            }
+            return output;
         }
     }
 }

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Wallet\" />
+    <Folder Include="Assertions\" />
   </ItemGroup>
 
   <ItemGroup>

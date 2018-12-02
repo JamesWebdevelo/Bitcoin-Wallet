@@ -26,7 +26,7 @@ namespace CLI
             do
             {
                 /// Display Seed
-                mnemonic = WalletGenerator.GenerateWallet(password);
+                mnemonic = Wallet.GenerateWallet(password);
                 Console.WriteLine(mnemonic);
             }
             while (password != passwordConf);
@@ -36,15 +36,13 @@ namespace CLI
             #region Recover Wallet
             do
             {
-                string result = WalletRecoverer.RecoverWallet(mnemonic, password);
+                string result = Wallet.RecoverWallet(mnemonic, password);
                 /// Display Seed
                 Console.WriteLine(result);
             }
             while (password != passwordConf);
             Console.ReadKey();
             #endregion
-
-
         }
     }
 }

@@ -19,7 +19,7 @@ namespace BusinessLayer
     public static class Config
     {
         /// Initialized with default attributes        
-        public static string DefaultWalletFileName = @"BitcoinWallet.json";
+        public static string DefaultWalletFileName = @"Wallet.json";
         public static Network Network = Network.TestNet;
         public static bool CanSpendUnconfirmed = false;
         public static ConnectionType ConnectionType = ConnectionType.Http;
@@ -40,17 +40,14 @@ namespace BusinessLayer
         #region Methods
         public static void Load()
         {
-            /// Get the defined settings
-            var rawContent = Deserializer.Deserialize();
-
+            /// Get the defined settings from json file
+            var rawContent = ConfigFile.Deserialize(ConfigFile.ConfigFilePath);
             DefaultWalletFileName = rawContent.DefaultWalletFileName;
 
             /// 1. Decide which Network (based on Law Of Demeter)
             Network = GetNetwork(rawContent.Network);
-
             /// 2. Decide which Connection Type (based on Law Of Demeter)
             ConnectionType = GetConnectionType(rawContent.ConnectionType);
-
             /// 3. Decide if Unconfirmed can be spent (based on Law Of Demeter)
             CanSpendUnconfirmed = GetSpendInformation(rawContent.CanSpendUnconfirmed);
         }
@@ -146,8 +143,11 @@ namespace BusinessLayer
         /// </summary>
         public static void Save()
         {
-            Serializer.Serialize(DefaultWalletFileName, Network.ToString(), ConnectionType.ToString(), CanSpendUnconfirmed.ToString());
-            Load();
+            bool fetchWasSuccessfull = ConfigFile.Serialize(DefaultWalletFileName, Network.ToString(), ConnectionType.ToString(), CanSpendUnconfirmed.ToString());
+            if(fetchWasSuccessfull == true)
+            {
+                Load();
+            }
         }
         #endregion
     }

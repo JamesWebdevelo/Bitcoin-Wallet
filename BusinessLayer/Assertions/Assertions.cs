@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 
 
-namespace BusinessLayer.Models
+namespace BusinessLayer.Assertions
 {
     public class Assertion
     {

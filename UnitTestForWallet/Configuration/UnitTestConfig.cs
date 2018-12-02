@@ -15,25 +15,62 @@ namespace UnitTestForWallet
         {
             // Act
             Network actual = Config.GetNetwork(expected);
-
             // Assert
             Assert.Equal(expected, actual.ToString());
         }
 
-        [Fact]
-        public void GetConnectionType_ReturnsResult()
+        [Theory]
+        [InlineData("")]
+        [InlineData("-1")]
+        [InlineData("FailNet")]
+        public void GetNetwork_ExceptionIfWrongOrEmptyNetwork(string expected)
         {
-            // Arrange
-            // Act
-            // Assert
+            // Act & Assert
+            Assert.Throws<Exception>(() => Config.GetNetwork(expected));
         }
 
-        [Fact]
-        public void GetSpendInformation_ReturnsResult()
+
+        [Theory]
+        [InlineData("FullNode")]
+        [InlineData("Http")]
+        public void GetConnectionType_ReturnsCorrectConnectionType(string expected)
         {
-            // Arrange
             // Act
+            var actual = Config.GetConnectionType(expected);
             // Assert
+            Assert.Equal(expected, actual.ToString());
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("&+?=9387&-.;,sHDb2vV+")]
+        [InlineData("Https")]
+        public void GetConnectionType_ExceptionIfWrongOrEmptyConnectionType(string expected)
+        {
+            // Act & Assert
+            Assert.Throws<Exception>(() => Config.GetConnectionType(expected));
+        }
+
+        [Theory]
+        [InlineData("False")]
+        [InlineData("True")]
+        public void GetSpendInformation_ReturnsCorrectSpendInformation(string expected)
+        {
+            // Act
+            bool actual = Config.GetSpendInformation(expected);
+            
+            // Assert
+            Assert.Equal(expected, actual.ToString());
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("-1")]
+        [InlineData("0")]
+        public void GetSpendInformation_ExceptionIfWrongOrEmptySpend(string expected)
+        {
+            // Act & Assert
+            Assert.Throws<Exception>(() => Config.GetSpendInformation(expected));
         }
     }
 }
