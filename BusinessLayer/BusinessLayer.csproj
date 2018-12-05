@@ -5,19 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Communication\FullNode\**" />
     <Compile Remove="FullNode\**" />
+    <EmbeddedResource Remove="Communication\FullNode\**" />
     <EmbeddedResource Remove="FullNode\**" />
+    <None Remove="Communication\FullNode\**" />
     <None Remove="FullNode\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="HBitcoin" Version="0.1.8.2" />
-    <PackageReference Include="NBitcoin" Version="4.1.1.7" />
+    <PackageReference Include="NBitcoin" Version="4.1.1.72" />
     <PackageReference Include="QBitNinja.Client" Version="1.0.3.47" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Communication\FullNode\" />
   </ItemGroup>
 
 </Project>

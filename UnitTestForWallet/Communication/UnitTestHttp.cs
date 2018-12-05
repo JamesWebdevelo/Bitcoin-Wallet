@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using BusinessLayer.Communication;
 
 namespace UnitTestForWallet.Communication
 {

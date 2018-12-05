@@ -4,7 +4,7 @@ using BusinessLayer.Configuration;
 using BusinessLayer;
 using NBitcoin;
 
-namespace UnitTestForWallet
+namespace UnitTestForWallet.Configuration
 {
     public class UnitTestConfig
     {
