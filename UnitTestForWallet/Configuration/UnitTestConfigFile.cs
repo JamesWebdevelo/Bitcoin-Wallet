@@ -75,7 +75,7 @@ namespace UnitTestForWallet
             // Arrange
             bool expected = true;
 
-            string walletFileName = "BitcoinWallet.json";
+            string walletFileName = Config.DefaultWalletFileName;
             string network = "TestNet";
             string connectionType = "Http";
             string canSpendUnconfirmed = "False";

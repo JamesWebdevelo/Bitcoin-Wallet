@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
+    <Folder Include="Communication\FullNode\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Communication\FullNode\" />
+    <PackageReference Include="HBitcoin" Version="0.1.8.2" />
+    <PackageReference Include="NBitcoin" Version="4.1.1.73" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Security;
 using System.Text;
 
 /// Allows to test interal methods
@@ -17,7 +18,7 @@ namespace BusinessLayer.Models
         private static string _walletFileName = Config.DefaultWalletFileName;
         private static string _walletFilePath = "";
 
-        private static string _walletDirName = "Wallets";
+        private static string _walletDirName = @"Wallets";
 
         /// <summary>
         /// Generate a new Wallet
@@ -61,7 +62,7 @@ namespace BusinessLayer.Models
             Safe safe = Safe.Recover(mnemonic, password, _walletFilePath, Config.Network);
 
             /// If no exception thrown the wallet is successfully recovered.
-            return ($"Wallet {_walletFilePath} is successfully recovered.");
+            return ($"Wallet {_walletFileName} is successfully recovered.");
         }
 
         /// <summary>
@@ -77,6 +78,35 @@ namespace BusinessLayer.Models
 
             /// Return Wallet folder Path
             return Path.Combine(_walletDirName, walletFileName);
+        }
+
+        /// <summary>
+        ///  Decrypt the wallet
+        /// </summary>
+        /// <param name="walletFilePath"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        internal static Safe DecryptWallet(string walletFilePath, string password)
+        {
+            Safe output = null;
+
+            try
+            {
+                /// Load safe with password
+                output = Safe.Load(password, walletFilePath);
+                Assertion.AssertCorrectNetwork(output.Network);
+            }
+            catch
+            {
+                throw new SecurityException("Invalid password, try again.");
+            }
+
+            if (output == null)
+            {
+                throw new Exception("Wallet could not be decrypted.");
+            }
+
+            return output;
         }
     }
 }

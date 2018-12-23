@@ -14,7 +14,7 @@ namespace UnitTestForWallet
         public void GetWalletFilePath_ReturnExpectedPath()
         {
             // Arrange
-            string fileName = "Walleter.json";
+            string fileName = "UnitTestWallet-File.json";
             string expected = $@"Wallets\{fileName}";
 
             // Act
@@ -39,6 +39,7 @@ namespace UnitTestForWallet
         {
             // Arrange
             string password = "admin";
+
             // Act
             string actual = Wallet.GenerateWallet(password);
             
@@ -51,18 +52,51 @@ namespace UnitTestForWallet
         public void RecoverWallet_WalletHasBeenSuccessfullyRecovered()
         {
             // Arrange
-            // Delete wallet file before try to recover.
+
+            // Delete before recover
             var path = Wallet.GetWalletFilePath(Config.DefaultWalletFileName);
-            Directory.Delete(path);
-            
+            File.Delete(path);
+
             string password = "admin";
             string phrase = Wallet.GenerateWallet(password);
-            
+            File.Delete(path);
+
             // Act
-            var expected = Wallet.RecoverWallet(phrase, password);
+            string expected = $"Wallet {Config.DefaultWalletFileName} is successfully recovered.";
+            string actual = Wallet.RecoverWallet(phrase, password);
 
             // Assert
-            Assert.Contains(expected, "Wallet is successfully recovered.");
+            Assert.Contains(expected, actual);
+        }
+
+        [Fact]
+        public void DecryptWallet_ReturnAnEncryptedSafe()
+        {
+            // Arrange
+
+            // Act
+
+            // Assert
+        }
+
+        [Fact]
+        public void DecryptWallet_ThrowAnExceptionWhenPasswordIsWrong()
+        {
+            // Arrange
+
+            // Act
+
+            // Assert
+        }
+
+        [Fact]
+        public void DecryptWallet_ThrowAnExceptionWhenWalletHasNotBeenDecrypted()
+        {
+            // Arrange
+
+            // Act
+
+            // Assert
         }
     }
 }

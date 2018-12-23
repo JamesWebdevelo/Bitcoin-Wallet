@@ -15,8 +15,12 @@
 
   <ItemGroup>
     <PackageReference Include="HBitcoin" Version="0.1.8.2" />
-    <PackageReference Include="NBitcoin" Version="4.1.1.72" />
+    <PackageReference Include="NBitcoin" Version="4.1.1.73" />
     <PackageReference Include="QBitNinja.Client" Version="1.0.3.47" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InfrastructureLayer\InfrastructureLayer.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Assertions;
-using BusinessLayer.Communication;
+using InfrastructureLayer.Communication;
 using HBitcoin.KeyManagement;
 using NBitcoin;
 using QBitNinja.Client.Models;
@@ -20,7 +20,7 @@ namespace BusinessLayer.Models
             /// Get current Wallet file
             var walletFilePath = Wallet.GetWalletFilePath(Config.DefaultWalletFileName);
 
-            Safe safe = DecryptWallet(walletFilePath, password);
+            Safe safe = Wallet.DecryptWallet(walletFilePath, password);
 
             if (Config.ConnectionType == ConnectionType.Http)
             {
@@ -36,29 +36,6 @@ namespace BusinessLayer.Models
             }
 
             return PublicAddresses;
-        }
-
-        private static Safe DecryptWallet(string walletFilePath, string password)
-        {
-            Safe output = null;
-
-            try
-            {
-                /// Load safe with password
-                output = Safe.Load(password, walletFilePath);
-                Assertion.AssertCorrectNetwork(output.Network);
-            }
-            catch
-            {
-                throw new SecurityException("Invalid password, try again.");
-            }
-
-            if (output == null)
-            {
-                throw new Exception("Wallet could not be decrypted.");
-            }
-
-            return output;
         }
 
         /// <summary>

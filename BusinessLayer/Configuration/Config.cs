@@ -19,7 +19,7 @@ namespace BusinessLayer
     public static class Config
     {
         /// Initialized with default attributes        
-        public static string DefaultWalletFileName = @"Wallet.json";
+        public static string DefaultWalletFileName = "Wallet.json";
         public static Network Network = Network.TestNet;
         public static bool CanSpendUnconfirmed = false;
         public static ConnectionType ConnectionType = ConnectionType.Http;
