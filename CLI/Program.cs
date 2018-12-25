@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Configuration;
 using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -19,28 +20,33 @@ namespace CLI
 
             #region Generate a Wallet
             string password = "admin";
-            string passwordConf = "admin";
+            //string passwordConf = "admin";
 
-            string mnemonic = "";
+            //string mnemonic = "";
 
-            do
-            {
-                /// Display Seed
-                mnemonic = Wallet.GenerateWallet(password);
-                Console.WriteLine(mnemonic);
-            }
-            while (password != passwordConf);
-            Console.ReadKey();
+            //do
+            //{
+            //    /// Display Seed
+            //    mnemonic = Wallet.GenerateWallet(password);
+            //    Console.WriteLine(mnemonic);
+            //}
+            //while (password != passwordConf);
+            //Console.ReadKey();
             #endregion
 
             #region Recover Wallet
-            do
-            {
-                string result = Wallet.RecoverWallet(mnemonic, password);
-                /// Display Seed
-                Console.WriteLine(result);
-            }
-            while (password != passwordConf);
+            //do
+            //{
+            //    string result = Wallet.RecoverWallet(mnemonic, password);
+            //    /// Display Seed
+            //    Console.WriteLine(result);
+            //}
+            //while (password != passwordConf);
+            //Console.ReadKey();
+            #endregion
+
+            #region Receive
+            Receiver.GetPublicAddresses(password);
             Console.ReadKey();
             #endregion
         }

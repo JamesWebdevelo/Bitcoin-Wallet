@@ -6,7 +6,7 @@ using NBitcoin;
 using BusinessLayer.Models;
 using System.IO;
 
-namespace UnitTestForWallet
+namespace UnitTestForWallet.Models
 {
     public class UnitTestWallet 
     {
@@ -24,15 +24,15 @@ namespace UnitTestForWallet
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void GenerateWallet_HandleCaseIfSomethingGoesWrong()
-        {
-            // Arrange
+        //[Fact]
+        //public void GenerateWallet_HandleCaseIfSomethingGoesWrong()
+        //{
+        //    // Arrange
 
-            // Act
+        //    // Act
 
-            // Assert
-        }
+        //    // Assert
+        //}
 
         [Fact]
         public void GenerateWallet_ReturnPassphrase()
@@ -52,7 +52,7 @@ namespace UnitTestForWallet
         public void RecoverWallet_WalletHasBeenSuccessfullyRecovered()
         {
             // Arrange
-
+            
             // Delete before recover
             var path = Wallet.GetWalletFilePath(Config.DefaultWalletFileName);
             File.Delete(path);
@@ -69,34 +69,34 @@ namespace UnitTestForWallet
             Assert.Contains(expected, actual);
         }
 
-        [Fact]
-        public void DecryptWallet_ReturnAnEncryptedSafe()
-        {
-            // Arrange
+        //[Fact]
+        //public void DecryptWallet_ReturnAnEncryptedSafe()
+        //{
+        //    // Arrange
 
-            // Act
+        //    // Act
 
-            // Assert
-        }
+        //    // Assert
+        //}
 
-        [Fact]
-        public void DecryptWallet_ThrowAnExceptionWhenPasswordIsWrong()
-        {
-            // Arrange
+        //[Fact]
+        //public void DecryptWallet_ThrowAnExceptionWhenPasswordIsWrong()
+        //{
+        //    // Arrange
 
-            // Act
+        //    // Act
 
-            // Assert
-        }
+        //    // Assert
+        //}
 
-        [Fact]
-        public void DecryptWallet_ThrowAnExceptionWhenWalletHasNotBeenDecrypted()
-        {
-            // Arrange
+        //[Fact]
+        //public void DecryptWallet_ThrowAnExceptionWhenWalletHasNotBeenDecrypted()
+        //{
+        //    // Arrange
 
-            // Act
+        //    // Act
 
-            // Assert
-        }
+        //    // Assert
+        //}
     }
 }

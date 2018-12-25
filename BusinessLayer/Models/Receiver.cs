@@ -1,5 +1,4 @@
 ﻿using BusinessLayer.Assertions;
-using InfrastructureLayer.Communication;
 using HBitcoin.KeyManagement;
 using NBitcoin;
 using QBitNinja.Client.Models;
@@ -8,14 +7,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using System.Text;
+using BusinessLayer.Configuration;
+using BusinessLayer.Communication;
 
 namespace BusinessLayer.Models
 {
-    public class Receiver
+    public static class Receiver
     {
-        private List<string> PublicAddresses { get; set; }
+        private static List<string> PublicAddresses { get; set; }
 
-        public List<string> ReceiveCoins(string password)
+        public static List<string> GetPublicAddresses(string password)
         {
             /// Get current Wallet file
             var walletFilePath = Wallet.GetWalletFilePath(Config.DefaultWalletFileName);
@@ -24,7 +25,7 @@ namespace BusinessLayer.Models
 
             if (Config.ConnectionType == ConnectionType.Http)
             {
-                PublicAddresses = GetPublicAddresses(safe);
+                PublicAddresses = CalculateAddressKeys(safe);
             }
             else if (Config.ConnectionType == ConnectionType.FullNode)
             {
@@ -32,7 +33,7 @@ namespace BusinessLayer.Models
             }
             else
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException("Please check your config file and make sure it contains a connection type.");
             }
 
             return PublicAddresses;
@@ -43,11 +44,11 @@ namespace BusinessLayer.Models
         /// </summary>
         /// <param name="safe"></param>
         /// <returns></returns>
-        private static List<string> GetPublicAddresses(Safe safe)
+        private static List<string> CalculateAddressKeys(Safe safe)
         {
-            List<string> output = null;
+            List<string> output = new List<string>();
 
-            /// Just want to show the user 7 unused addresses
+            /// Display seven unused addresses to the user
             /// Dictionary<BitcoinAddress, List<BalanceOperation>> 
             var operationsPerReceiveAddresses = QBitNinjaQuerrier.QueryOperationsPerSafeAddresses(safe, 7, HdPathType.Receive);
 

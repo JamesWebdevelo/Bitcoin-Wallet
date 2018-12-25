@@ -1,4 +1,5 @@
-﻿using HBitcoin.KeyManagement;
+﻿using BusinessLayer.Configuration;
+using HBitcoin.KeyManagement;
 using NBitcoin;
 using System;
 using System.Collections.Generic;

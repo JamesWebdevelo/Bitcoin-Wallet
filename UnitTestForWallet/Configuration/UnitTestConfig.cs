@@ -36,9 +36,9 @@ namespace UnitTestForWallet.Configuration
         public void GetConnectionType_ReturnsCorrectConnectionType(string expected)
         {
             // Act
-            var actual = Config.GetConnectionType(expected);
+            var actual = Config.GetConnectionType(expected).ToString();
             // Assert
-            Assert.Equal(expected, actual.ToString());
+            Assert.Equal(expected, actual);
         }
 
         [Theory]

@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Assertions;
+using BusinessLayer.Configuration;
 using HBitcoin.KeyManagement;
 using NBitcoin;
 using System;

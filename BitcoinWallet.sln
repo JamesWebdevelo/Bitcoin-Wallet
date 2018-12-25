@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLI", "CLI\CLI.csproj", "{3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestForWallet", "UnitTestForWallet\UnitTestForWallet.csproj", "{52303FE6-76BC-4EA4-B8DF-1A42CD93F965}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureLayer", "InfrastructureLayer\InfrastructureLayer.csproj", "{9C21548F-8EC2-4AB6-AA78-FC6F8A557CE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiLayer", "WebApiLayer\WebApiLayer.csproj", "{C2A13B8A-5D7D-4EDC-B532-3531EACAFA09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{52303FE6-76BC-4EA4-B8DF-1A42CD93F965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52303FE6-76BC-4EA4-B8DF-1A42CD93F965}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52303FE6-76BC-4EA4-B8DF-1A42CD93F965}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C21548F-8EC2-4AB6-AA78-FC6F8A557CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C21548F-8EC2-4AB6-AA78-FC6F8A557CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C21548F-8EC2-4AB6-AA78-FC6F8A557CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C21548F-8EC2-4AB6-AA78-FC6F8A557CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2A13B8A-5D7D-4EDC-B532-3531EACAFA09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2A13B8A-5D7D-4EDC-B532-3531EACAFA09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2A13B8A-5D7D-4EDC-B532-3531EACAFA09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2A13B8A-5D7D-4EDC-B532-3531EACAFA09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

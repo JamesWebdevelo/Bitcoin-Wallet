@@ -1,4 +1,6 @@
 ﻿using HBitcoin.KeyManagement;
+using BusinessLayer.Models;
+using BusinessLayer.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,33 +11,29 @@ namespace UnitTestForWallet.Models
     public class UnitTestReceiver
     {
         [Fact]
-        public void ReceiveCoins_()
+        public void GetPublicAddresses_ReturnAddressesIfHttpCommunicationWasChoosen()
         {
             // Arrange
+            string password = "admin";
+            Config.ConnectionType = ConnectionType.Http;
+            //Config.Save();
 
             // Act
+            var actual = Receiver.GetPublicAddresses(password);
 
             // Assert
+            Assert.True(actual.Count == 7);
         }
 
         [Fact]
-        public void GetPublicAddresses_ReturnExpectedAddresses()
+        public void GetPublicAddresses_HandleExpectionWhenFullNodeCommunicationWasChoosen()
         {
             // Arrange
+            string password = "admin";
+            Config.ConnectionType = ConnectionType.FullNode;
 
-            // Act
-
-            // Assert
-        }
-
-        [Fact]
-        public void GetPublicAddresses_ReturnNullValueInCaseOfWrongSafe()
-        {
-            // Arrange
-
-            // Act
-
-            // Assert
+            // Act / Assert
+            Assert.Throws<NotImplementedException>(() => Receiver.GetPublicAddresses(password));
         }
     }
 }

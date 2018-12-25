@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace BusinessLayer
+namespace BusinessLayer.Configuration
 {
     public enum ConnectionType
     {
@@ -46,8 +46,10 @@ namespace BusinessLayer
 
             /// 1. Decide which Network (based on Law Of Demeter)
             Network = GetNetwork(rawContent.Network);
+            
             /// 2. Decide which Connection Type (based on Law Of Demeter)
             ConnectionType = GetConnectionType(rawContent.ConnectionType);
+            
             /// 3. Decide if Unconfirmed can be spent (based on Law Of Demeter)
             CanSpendUnconfirmed = GetSpendInformation(rawContent.CanSpendUnconfirmed);
         }

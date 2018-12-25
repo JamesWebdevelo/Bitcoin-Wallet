@@ -5,7 +5,7 @@ using System.IO;
 using NBitcoin;
 using BusinessLayer;
 
-namespace UnitTestForWallet
+namespace UnitTestForWallet.Configuration
 {
     public class UnitTestConfigFile
     {
